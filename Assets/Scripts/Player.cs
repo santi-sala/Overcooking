@@ -4,28 +4,66 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField]
-    private float _moveSpeed = 7f;
-    [SerializeField]
-    private float _rotateSpeed = 10f;
-    [SerializeField]
-    private GameInput gameInput;
+    [SerializeField] private float _moveSpeed = 7f;
+    [SerializeField] private float _rotateSpeed = 10f;
+    [SerializeField] private GameInput _gameInput;
+    [SerializeField] private LayerMask _countersLayerMask;
 
-    private bool isWalking;
+
+    private bool _isWalking;
+    private Vector3 _lastInteractDirection;
 
     private void Update()
     {
+        HandlePlayerMovement();
+        HandlePlayerInteractions();
 
-        Vector2 inputVector = gameInput.GetMovementVectorNormalized(); 
+    }
+    
+    public bool IsWalking()
+    {
+        return _isWalking;
+    }
+
+    private Vector3 GetPlayerMovementDirection()
+    {
+        Vector2 inputVector = _gameInput.GetMovementVectorNormalized();
         Vector3 moveDirection = new Vector3(inputVector.x, 0f, inputVector.y);
+        return moveDirection;
+    }
+    
+    private void HandlePlayerInteractions()
+    {
+        Vector3 moveDirection = GetPlayerMovementDirection();
+
+        if (moveDirection != Vector3.zero)
+        {
+            _lastInteractDirection = moveDirection;
+        }
+
+
+        float interactDistance = 2f;
+        RaycastHit raycastHit;
+        if (Physics.Raycast(transform.position, _lastInteractDirection, out raycastHit, interactDistance, _countersLayerMask))
+        {
+            if(raycastHit.transform.TryGetComponent(out ClearCounter clearCounter))
+            {
+                clearCounter.Interact();
+            }
+        }        
+    }
+
+    private void HandlePlayerMovement()
+    {
+        Vector3 moveDirection = GetPlayerMovementDirection();
 
         float moveDistance = _moveSpeed * Time.deltaTime;
         float playerRadius = 0.7f;
         float playerHeight = 2f;
-        bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, 
-            playerRadius,  moveDirection, moveDistance);
+        bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight,
+            playerRadius, moveDirection, moveDistance);
 
-        if(!canMove)
+        if (!canMove)
         {
             // Trying to move diagonally
 
@@ -60,26 +98,21 @@ public class Player : MonoBehaviour
         }
         if (canMove)
         {
-            transform.position += moveDirection * moveDistance;  
+            transform.position += moveDirection * moveDistance;
         }
 
-        //isWalking = moveDirection != Vector3.zero;
+        //_isWalking = moveDirection != Vector3.zero;
         if (moveDirection == Vector3.zero)
         {
-            isWalking = false;
+            _isWalking = false;
         }
         else
         {
-            isWalking = true;
+            _isWalking = true;
         }
 
         transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * _rotateSpeed);
-
-
     }
 
-    public bool IsWalking()
-    {
-        return isWalking;
-    }
+
 }
