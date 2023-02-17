@@ -571,6 +571,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: ClearCounter (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3986140119588693296, guid: 7421e2a4e6e2c1c4fb9c757262469f0d,
+        type: 3}
+      propertyPath: _kitchenObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 5929a57abbafcc24e988a80a32bf0758,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7421e2a4e6e2c1c4fb9c757262469f0d, type: 3}
 --- !u!1 &542878067
@@ -812,6 +818,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: ClearCounter (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3986140119588693296, guid: 7421e2a4e6e2c1c4fb9c757262469f0d,
+        type: 3}
+      propertyPath: _tomatoPrefab
+      value: 
+      objectReference: {fileID: 1879861791410595945, guid: 91f7ad060a8ae94408d0f22749f45601,
+        type: 3}
+    - target: {fileID: 3986140119588693296, guid: 7421e2a4e6e2c1c4fb9c757262469f0d,
+        type: 3}
+      propertyPath: _kitchenObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 0db37b642f2308a42bdd0e96932c20d4,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7421e2a4e6e2c1c4fb9c757262469f0d, type: 3}
 --- !u!1 &992958277
@@ -1131,5 +1149,80 @@ PrefabInstance:
       propertyPath: m_Name
       value: ClearCounter
       objectReference: {fileID: 0}
+    - target: {fileID: 3986140119588693296, guid: 7421e2a4e6e2c1c4fb9c757262469f0d,
+        type: 3}
+      propertyPath: _kitchenObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 5929a57abbafcc24e988a80a32bf0758,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7421e2a4e6e2c1c4fb9c757262469f0d, type: 3}
+--- !u!1001 &1879861791351147085
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1879861791410595944, guid: 48e9c1dc7d4268b43804984d88297fb9,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879861791410595944, guid: 48e9c1dc7d4268b43804984d88297fb9,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879861791410595944, guid: 48e9c1dc7d4268b43804984d88297fb9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879861791410595944, guid: 48e9c1dc7d4268b43804984d88297fb9,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879861791410595944, guid: 48e9c1dc7d4268b43804984d88297fb9,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879861791410595944, guid: 48e9c1dc7d4268b43804984d88297fb9,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879861791410595944, guid: 48e9c1dc7d4268b43804984d88297fb9,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879861791410595944, guid: 48e9c1dc7d4268b43804984d88297fb9,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879861791410595944, guid: 48e9c1dc7d4268b43804984d88297fb9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879861791410595944, guid: 48e9c1dc7d4268b43804984d88297fb9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879861791410595944, guid: 48e9c1dc7d4268b43804984d88297fb9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879861791410595945, guid: 48e9c1dc7d4268b43804984d88297fb9,
+        type: 3}
+      propertyPath: m_Name
+      value: Tomato
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 48e9c1dc7d4268b43804984d88297fb9, type: 3}

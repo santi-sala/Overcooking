@@ -98,7 +98,7 @@ public class Player : MonoBehaviour
             SetSelectedCounter(null);
         }
 
-        Debug.Log(_selectedCounter);
+        //Debug.Log(_selectedCounter);
     }
 
     private void HandlePlayerMovement()
