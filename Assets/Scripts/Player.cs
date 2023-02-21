@@ -10,7 +10,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
     public class OnSelectedCounterChangedEventArgs :  EventArgs
     {
-        public ClearCounter selectedCounterArg;
+        public BaseCounter selectedCounterArg;
     }
 
     [SerializeField] private float _moveSpeed = 7f;
@@ -22,7 +22,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
     private bool _isWalking;
     private Vector3 _lastInteractDirection;
-    private ClearCounter _selectedCounter;
+    private BaseCounter _selectedCounter;
     private KitchenObject _kitchenObject;
 
     private void Awake()
@@ -79,15 +79,15 @@ public class Player : MonoBehaviour, IKitchenObjectParent
         float interactDistance = 2f;
         RaycastHit raycastHit;
 
-        // Check if theres a counter(has to be in layer mask) in front of the player
+        // Check if theres a baseCounter(has to be in layer mask) in front of the player
         if (Physics.Raycast(transform.position, _lastInteractDirection, out raycastHit, interactDistance, _countersLayerMask))
         {
-            // Check that the counter hasd a clearCouonter component
-            if(raycastHit.transform.TryGetComponent(out ClearCounter clearCounter))
+            // Check that the baseCounter hasd a clearCouonter component
+            if(raycastHit.transform.TryGetComponent(out BaseCounter baseCounter))
             {
-                if (clearCounter != _selectedCounter)
+                if (baseCounter != _selectedCounter)
                 {
-                    SetSelectedCounter(clearCounter);
+                    SetSelectedCounter(baseCounter);
                 }
             }
             else
@@ -164,7 +164,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
         transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * _rotateSpeed);
     }
 
-    private void SetSelectedCounter(ClearCounter selectedCounterParameter)
+    private void SetSelectedCounter(BaseCounter selectedCounterParameter)
     {
         this._selectedCounter = selectedCounterParameter;
 
