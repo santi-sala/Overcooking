@@ -2,27 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClearCounter : MonoBehaviour
+public class ClearCounter : MonoBehaviour, IKitchenObjectParent
 {
     [SerializeField] private SO_KitchenObjects _kitchenObjectSO;
     [SerializeField] private Transform _counterTopPoint;
-    [SerializeField] private ClearCounter _secondCounter;
-    [SerializeField] private bool _testing;
 
 
     private KitchenObject _kitchenObject;
 
-    private void Update()
-    {
-        if (_testing && Input.GetKeyDown(KeyCode.T))
-        {
-            if (_kitchenObject != null)
-            {
-                _kitchenObject.SetClearCounter(_secondCounter);
-            }
-        }
-    }
-    public void Interact()
+    public void Interact(Player player)
     {
         // Spawning a kitchen object in a clear counter
         if (_kitchenObject == null)
@@ -32,14 +20,14 @@ public class ClearCounter : MonoBehaviour
             // This will know that there is something on top of the counter therefore not spawning more.
             //_kitchenObject = kitchenObjectTranform.GetComponent<KitchenObject>();
             // This will know on which vcounter it the kitchen object is
-            //_kitchenObject.SetClearCounter(this);
+            //_kitchenObject.SetKitchenObjectParent(this);
             //kitchenObjectTranform.localPosition = Vector3.zero;
-            kitchenObjectTranform.GetComponent<KitchenObject>().SetClearCounter(this);
-
+            kitchenObjectTranform.GetComponent<KitchenObject>().SetKitchenObjectParent(this);
         }
         else
         {
-            Debug.Log(_kitchenObject.GetClearCounter());
+            _kitchenObject.SetKitchenObjectParent(player);
+            //Debug.Log(_kitchenObject.GetKitchenObjectParent());
         }
     }
 

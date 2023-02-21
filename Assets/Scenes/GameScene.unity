@@ -755,6 +755,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 0db37b642f2308a42bdd0e96932c20d4,
         type: 2}
+    - target: {fileID: 3986140119588693296, guid: 7421e2a4e6e2c1c4fb9c757262469f0d,
+        type: 3}
+      propertyPath: _kitchenObjectSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 0db37b642f2308a42bdd0e96932c20d4,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7421e2a4e6e2c1c4fb9c757262469f0d, type: 3}
 --- !u!1 &992958277
@@ -1007,6 +1013,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1770649946 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3986140119588693296, guid: 7421e2a4e6e2c1c4fb9c757262469f0d,
+    type: 3}
+  m_PrefabInstance: {fileID: 908553284}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0022a258f0679ed49b074df2ecc34a99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &313726379985614119
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1074,5 +1092,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: ClearCounter
       objectReference: {fileID: 0}
+    - target: {fileID: 3986140119588693296, guid: 7421e2a4e6e2c1c4fb9c757262469f0d,
+        type: 3}
+      propertyPath: _testing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986140119588693296, guid: 7421e2a4e6e2c1c4fb9c757262469f0d,
+        type: 3}
+      propertyPath: _secondCounter
+      value: 
+      objectReference: {fileID: 1770649946}
+    - target: {fileID: 3986140119588693296, guid: 7421e2a4e6e2c1c4fb9c757262469f0d,
+        type: 3}
+      propertyPath: _kitchenObjectSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 5929a57abbafcc24e988a80a32bf0758,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7421e2a4e6e2c1c4fb9c757262469f0d, type: 3}
