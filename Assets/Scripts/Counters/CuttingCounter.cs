@@ -18,7 +18,7 @@ public class CuttingCounter : BaseCounter, IHasProgress
         if (!HasKitchenObject())
         {
             // No kitchen object on the counter
-            Debug.Log("There is NO kitchen object on the counter!!");
+            //Debug.Log("There is NO kitchen object on the counter!!");
             if (player.HasKitchenObject())
             {
                 // Player has a kitchen object
@@ -44,7 +44,7 @@ public class CuttingCounter : BaseCounter, IHasProgress
         else
         {
             // There is a kitchen object
-            Debug.Log("There IS kitchen object on the counter!!");
+            //Debug.Log("There IS kitchen object on the counter!!");
 
             if (player.HasKitchenObject())
             {

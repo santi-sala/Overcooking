@@ -37,7 +37,7 @@ public class PlateKitchenObject : KitchenObject
         {
             // Add ingredient in the list
             _kitchenObjectSOList.Add(kitchenObjectSO);
-            Debug.Log("Ingredient added to the plate");
+            //Debug.Log("Ingredient added to the plate");
 
             OnIngredientAdded?.Invoke(this, new OnIngredientAddedEventArgs
             {

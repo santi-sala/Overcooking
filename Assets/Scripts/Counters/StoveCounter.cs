@@ -102,7 +102,7 @@ public class StoveCounter : BaseCounter, IHasProgress
                     break;               
             }
         }       
-            Debug.Log(_currentState);
+            //Debug.Log(_currentState);
           
     }
     public override void Interact(Player player)
@@ -148,7 +148,7 @@ public class StoveCounter : BaseCounter, IHasProgress
             if (player.HasKitchenObject())
             {
                 // Player has a kitcheobject
-                Debug.Log("Player is carrying a citcken object");
+                //Debug.Log("Player is carrying a citcken object");
 
                 if (player.GetKitchenObject().TryGetPlate(out PlateKitchenObject plateKitchenObject))
                 {
