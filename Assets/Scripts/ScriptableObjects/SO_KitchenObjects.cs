@@ -19,4 +19,9 @@ public class SO_KitchenObjects : ScriptableObject
         return _objectName;
     }
 
+    public Sprite GetSprite()
+    {
+        return _sprite;
+    }
+
 }
