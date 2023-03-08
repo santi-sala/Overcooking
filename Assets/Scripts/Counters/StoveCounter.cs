@@ -57,7 +57,7 @@ public class StoveCounter : BaseCounter, IHasProgress
 
                         KitchenObject.SpawnKitchenObject(_fryingRecipeS0.output, this);
 
-                        Debug.Log("object fried!!)");
+                        //Debug.Log("object fried!!)");
 
                         _currentState = State.Fried;
                         _burningTimer = 0f;
@@ -143,7 +143,7 @@ public class StoveCounter : BaseCounter, IHasProgress
         else
         {
             // There is a kitchen object
-            Debug.Log("There IS kitchen object on the counter!!");
+            //Debug.Log("There IS kitchen object on the counter!!");
 
             if (player.HasKitchenObject())
             {

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,9 +6,9 @@ using UnityEngine;
 public class SO_Recipe : ScriptableObject
 {
    [SerializeField] private List<SO_KitchenObjects> _kitchenObjectSOList;
-   [SerializeField] private String _recipeName;
+   [SerializeField] private string _recipeName;
 
-    public String GetRecipeName()
+    public string GetRecipeName()
     {
         return _recipeName;
     }
