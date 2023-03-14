@@ -1428,7 +1428,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59d97d27f2d9d9e45809fe5ba90f38c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioClipReferences: {fileID: 0}
+  _audioClipReferencesSO: {fileID: 11400000, guid: 117132ddd74fc70489af6577d9448190,
+    type: 2}
 --- !u!4 &543328839
 Transform:
   m_ObjectHideFlags: 0
@@ -2350,6 +2351,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1037734709}
   - component: {fileID: 1037734708}
+  - component: {fileID: 1037734710}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2393,6 +2395,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1037734710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037734707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 093c8411a2a7c7e4482e8e28b22e3145, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _volume: 1
 --- !u!1 &1077831053
 GameObject:
   m_ObjectHideFlags: 0

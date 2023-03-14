@@ -26,8 +26,7 @@ public class PlayerSounds : MonoBehaviour
             if (_player.IsWalking())
             {
                 SoundManager.Instance.PlayFootStepsSound(_player.transform.position, _volume);
-            }
-            
+            }            
         }
     }
 }
