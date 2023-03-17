@@ -5,9 +5,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public event EventHandler OnStateChange;
     public static GameManager Instance { get; private set; }
-    
+
+    public event EventHandler OnStateChange;
+    public event EventHandler OnGamePaused;
+    public event EventHandler OnGameResume;
+
     private enum State
     {
         WaitingToStart,
@@ -20,13 +23,26 @@ public class GameManager : MonoBehaviour
     private float _waitingToStartTimer = 1f;
     private float _countdownToStartTimer = 3f;
     private float _gamePlayingTimer;
-    private float _gamePlayingTimerMax = 10f;
+    [SerializeField] private float _gamePlayingTimerMax = 10f;
+
+    private bool _isGamePaused = false;
 
     private void Awake()
     {
         Instance = this;
         _currentState = State.WaitingToStart;
     }
+
+    private void Start()
+    {
+        GameInput.Instance.OnPauseEvent += GameInput_Instance_OnPauseEvent;
+    }
+
+    private void GameInput_Instance_OnPauseEvent(object sender, EventArgs e)
+    {
+        TogglePauseGame();
+    }
+    
 
     private void Update()
     {
@@ -86,6 +102,22 @@ public class GameManager : MonoBehaviour
     public float GetGamePlayingTimerNormalized()
     {
         return 1 - (_gamePlayingTimer / _gamePlayingTimerMax);
+    }
+
+    public void TogglePauseGame()
+    {
+        _isGamePaused = !_isGamePaused;
+
+        if (_isGamePaused)
+        {
+            Time.timeScale = 0f;
+            OnGamePaused?.Invoke(this, EventArgs.Empty);
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            OnGameResume?.Invoke(this, EventArgs.Empty);
+        }
     }
 
 }

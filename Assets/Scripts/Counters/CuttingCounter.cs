@@ -7,6 +7,11 @@ public class CuttingCounter : BaseCounter, IHasProgress
     {
     public static event EventHandler OnAnyCut;
 
+    // The new here is because it inherits from BaseCounter which has the same function
+    new public static void ResetStaticData()
+    {
+        OnAnyCut = null;
+    }
 
     public event EventHandler<IHasProgress.OnprogressEventChangedArgs> OnProgressChanged;
     public event EventHandler OnCut;
@@ -78,6 +83,8 @@ public class CuttingCounter : BaseCounter, IHasProgress
             // There is a kitchen object AND can be cut... then cut it!!
             _cuttingProgress++;
             OnCut?.Invoke(this, EventArgs.Empty);
+
+            //Debug.Log(OnAnyCut.GetInvocationList().Length);
             OnAnyCut?.Invoke(this, EventArgs.Empty);
 
             SO_CuttingRecipe cuttingRecipeSO = GetCuttingRecipeSOWithInput(GetKitchenObject().GetKitchenObjectSO());
