@@ -16,10 +16,30 @@ public class UI_Options : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _sfxText;
     [SerializeField] private TextMeshProUGUI _musicText;
 
+    [SerializeField] private Button _moveUpButton;
+    [SerializeField] private Button _moveDownButton;
+    [SerializeField] private Button _moveLeftButton;
+    [SerializeField] private Button _moveRightButton;
+    [SerializeField] private Button _moveInteractButton;
+    [SerializeField] private Button _moveInteractAlternateButton;
+    [SerializeField] private Button _movePauseButton;
+
+    [SerializeField] private TextMeshProUGUI _moveUpText;
+    [SerializeField] private TextMeshProUGUI _moveDownText;
+    [SerializeField] private TextMeshProUGUI _moveLeftText;
+    [SerializeField] private TextMeshProUGUI _moveRightText;
+    [SerializeField] private TextMeshProUGUI _moveInteractText;
+    [SerializeField] private TextMeshProUGUI _moveInteractAlternateText;
+    [SerializeField] private TextMeshProUGUI _movePauseText;
+
+    [SerializeField] private Transform _pressToRebindKeyTransform;
+
+
+
+
     private void Awake()
     {
         Instance = this;
-
         _addSfxButton.onClick.AddListener(() =>
         {
             SoundManager.Instance.AddVolumeSfx();
@@ -49,6 +69,36 @@ public class UI_Options : MonoBehaviour
             UI_GamePause.Instance.Show();
             Hide();
         });
+
+        //Listening to change for Keybindings
+        _moveUpButton.onClick.AddListener(() =>
+        {
+            RebindKeyBinding(GameInput.Bindings.Move_Up);
+        });
+        _moveDownButton.onClick.AddListener(() =>
+        {
+            RebindKeyBinding(GameInput.Bindings.Move_Down);
+        });
+        _moveLeftButton.onClick.AddListener(() =>
+        {
+            RebindKeyBinding(GameInput.Bindings.Move_Left);
+        });
+        _moveRightButton.onClick.AddListener(() =>
+        {
+            RebindKeyBinding(GameInput.Bindings.Move_Right);
+        });
+        _moveInteractButton.onClick.AddListener(() =>
+        {
+            RebindKeyBinding(GameInput.Bindings.Interact);
+        });
+        _moveInteractAlternateButton.onClick.AddListener(() =>
+        {
+            RebindKeyBinding(GameInput.Bindings.Interact_Alternate);
+        });
+        _movePauseButton.onClick.AddListener(() =>
+        {
+            RebindKeyBinding(GameInput.Bindings.Pause);
+        });
     }
 
     private void Start()
@@ -57,7 +107,9 @@ public class UI_Options : MonoBehaviour
 
         UpdateVisualSfx();
         UpdateVisualMusic();
+        UpdateVisualKeyBinding();
 
+        HidePressToRebindKey();
         Hide();
     }
 
@@ -76,6 +128,17 @@ public class UI_Options : MonoBehaviour
         _musicText.text = "Music volume: " + Mathf.Round(MusicManager.Instance.GetVolume() * 10).ToString();
     }
 
+    private void UpdateVisualKeyBinding()
+    {
+        _moveUpText.text = GameInput.Instance.GetBindingText(GameInput.Bindings.Move_Up);
+        _moveDownText.text = GameInput.Instance.GetBindingText(GameInput.Bindings.Move_Down);
+        _moveLeftText.text = GameInput.Instance.GetBindingText(GameInput.Bindings.Move_Left);
+        _moveRightText.text = GameInput.Instance.GetBindingText(GameInput.Bindings.Move_Right);
+        _moveInteractText.text = GameInput.Instance.GetBindingText(GameInput.Bindings.Interact);
+        _moveInteractAlternateText.text = GameInput.Instance.GetBindingText(GameInput.Bindings.Interact_Alternate);
+        _movePauseText.text = GameInput.Instance.GetBindingText(GameInput.Bindings.Pause);
+    }
+
     public void Show()
     {
         gameObject.SetActive(true);
@@ -83,7 +146,25 @@ public class UI_Options : MonoBehaviour
 
     private void Hide()
     {
-        gameObject.SetActive(false);
-       
+        gameObject.SetActive(false);       
+    }
+
+    private void ShowPressToRebindKey()
+    {
+        _pressToRebindKeyTransform.gameObject.SetActive(true);
+    }
+
+    private void HidePressToRebindKey()
+    {
+        _pressToRebindKeyTransform.gameObject.SetActive(false);
+    }
+
+    private void RebindKeyBinding(GameInput.Bindings binding)
+    {
+        ShowPressToRebindKey();
+        GameInput.Instance.RebindBinding(binding,() => {
+            HidePressToRebindKey();
+            UpdateVisualKeyBinding();
+            });
     }
 }
