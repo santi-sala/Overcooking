@@ -35,8 +35,8 @@ public class UI_GamePause : MonoBehaviour
 
         _mainOptionsButton.onClick.AddListener(() =>
         {
-            UI_Options.Instance.Show();
             Hide();
+            UI_Options.Instance.Show(Show);
         });
 
 
@@ -54,6 +54,9 @@ public class UI_GamePause : MonoBehaviour
     public void Show()
     {
         gameObject.SetActive(true);
+
+        // This will make it highlight so its easier to see in gamepads
+        _resumeButton.Select();
     }
 
     private void Hide()

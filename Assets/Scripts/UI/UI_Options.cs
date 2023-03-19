@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -16,6 +17,7 @@ public class UI_Options : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _sfxText;
     [SerializeField] private TextMeshProUGUI _musicText;
 
+    // Keyboard bindings
     [SerializeField] private Button _moveUpButton;
     [SerializeField] private Button _moveDownButton;
     [SerializeField] private Button _moveLeftButton;
@@ -32,10 +34,18 @@ public class UI_Options : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _moveInteractAlternateText;
     [SerializeField] private TextMeshProUGUI _movePauseText;
 
+    // Gamepad bindings
+    [SerializeField] private Button _gamepadMoveInteractButton;
+    [SerializeField] private Button _gamepadMoveInteractAlternateButton;
+    [SerializeField] private Button _gamepadMovePauseButton;
+
+    [SerializeField] private TextMeshProUGUI _gamepadMoveInteractText;
+    [SerializeField] private TextMeshProUGUI _gamepadMoveInteractAlternateText;
+    [SerializeField] private TextMeshProUGUI _gamepadMovePauseText;
+
     [SerializeField] private Transform _pressToRebindKeyTransform;
 
-
-
+    private Action _onCloseButtonAction;
 
     private void Awake()
     {
@@ -66,11 +76,12 @@ public class UI_Options : MonoBehaviour
 
         _backButton.onClick.AddListener(() =>
         {
-            UI_GamePause.Instance.Show();
+           // UI_GamePause.Instance.Show();
             Hide();
+            _onCloseButtonAction();
         });
 
-        //Listening to change for Keybindings
+        //Listening to change for Keybindings (Keyboard)
         _moveUpButton.onClick.AddListener(() =>
         {
             RebindKeyBinding(GameInput.Bindings.Move_Up);
@@ -98,6 +109,20 @@ public class UI_Options : MonoBehaviour
         _movePauseButton.onClick.AddListener(() =>
         {
             RebindKeyBinding(GameInput.Bindings.Pause);
+        });
+
+        // Gamepad
+        _gamepadMoveInteractButton.onClick.AddListener(() =>
+        {
+            RebindKeyBinding(GameInput.Bindings.Gamepad_Interact);
+        });
+        _gamepadMoveInteractAlternateButton.onClick.AddListener(() =>
+        {
+            RebindKeyBinding(GameInput.Bindings.Gamepad_InteractAlternate);
+        });
+        _gamepadMovePauseButton.onClick.AddListener(() =>
+        {
+            RebindKeyBinding(GameInput.Bindings.Gamepad_Pause);
         });
     }
 
@@ -130,6 +155,7 @@ public class UI_Options : MonoBehaviour
 
     private void UpdateVisualKeyBinding()
     {
+        // Keyboard
         _moveUpText.text = GameInput.Instance.GetBindingText(GameInput.Bindings.Move_Up);
         _moveDownText.text = GameInput.Instance.GetBindingText(GameInput.Bindings.Move_Down);
         _moveLeftText.text = GameInput.Instance.GetBindingText(GameInput.Bindings.Move_Left);
@@ -137,11 +163,20 @@ public class UI_Options : MonoBehaviour
         _moveInteractText.text = GameInput.Instance.GetBindingText(GameInput.Bindings.Interact);
         _moveInteractAlternateText.text = GameInput.Instance.GetBindingText(GameInput.Bindings.Interact_Alternate);
         _movePauseText.text = GameInput.Instance.GetBindingText(GameInput.Bindings.Pause);
+
+        // Gamepad
+        _gamepadMoveInteractText.text = GameInput.Instance.GetBindingText(GameInput.Bindings.Gamepad_Interact);
+        _gamepadMoveInteractAlternateText.text = GameInput.Instance.GetBindingText(GameInput.Bindings.Gamepad_InteractAlternate);
+        _gamepadMovePauseText.text = GameInput.Instance.GetBindingText(GameInput.Bindings.Gamepad_Pause);
     }
 
-    public void Show()
+    public void Show(Action onCloseButtonAction)
     {
+        this._onCloseButtonAction = onCloseButtonAction;
+
         gameObject.SetActive(true);
+
+        _backButton.Select();
     }
 
     private void Hide()

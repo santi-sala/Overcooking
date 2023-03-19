@@ -21,7 +21,12 @@ public class GameInput : MonoBehaviour
         Move_Right, 
         Interact, 
         Interact_Alternate, 
-        Pause
+        Pause,
+        Gamepad_Interact,
+        Gamepad_InteractAlternate,
+        Gamepad_Pause,
+
+
     }
 
     private PLayerInputActions _playerInputActions;
@@ -116,6 +121,7 @@ public class GameInput : MonoBehaviour
     {
         switch (binding)
         {
+            default:
             case Bindings.Move_Up:
                 return _playerInputActions.Player.Move.bindings[1].ToDisplayString();
 
@@ -143,9 +149,13 @@ public class GameInput : MonoBehaviour
                 {
                     return _playerInputActions.Player.Pause.bindings[0].ToDisplayString();
                 }
-            default:
-                return _playerInputActions.Player.Interact.bindings[0].ToDisplayString();
-                
+            case Bindings.Gamepad_Interact:
+                return _playerInputActions.Player.Interact.bindings[1].ToDisplayString();
+            case Bindings.Gamepad_InteractAlternate:
+                return _playerInputActions.Player.InteractAlternate.bindings[1].ToDisplayString();
+            case Bindings.Gamepad_Pause:
+                return _playerInputActions.Player.Pause.bindings[1].ToDisplayString();
+
         }
 
     }
@@ -186,6 +196,18 @@ public class GameInput : MonoBehaviour
             case Bindings.Pause:
                 _inputAction = _playerInputActions.Player.Pause;
                 _inputIndex = 0;
+                break;
+            case Bindings.Gamepad_Interact:
+                _inputAction = _playerInputActions.Player.Interact;
+                _inputIndex = 1;
+                break;
+            case Bindings.Gamepad_InteractAlternate:
+                _inputAction = _playerInputActions.Player.InteractAlternate;
+                _inputIndex = 1;
+                break;
+            case Bindings.Gamepad_Pause:
+                _inputAction = _playerInputActions.Player.Pause;
+                _inputIndex = 1;
                 break;
         }
         _inputAction.PerformInteractiveRebinding(_inputIndex).OnComplete(callback =>
