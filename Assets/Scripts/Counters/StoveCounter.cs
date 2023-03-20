@@ -137,7 +137,7 @@ public class StoveCounter : BaseCounter, IHasProgress
             else
             {
                 // Player is NOT carrying a kitchen object
-                Debug.Log("Get a kitchen object!!");
+                //Debug.Log("Get a kitchen object!!");
             }
         }
         else
@@ -148,28 +148,28 @@ public class StoveCounter : BaseCounter, IHasProgress
             if (player.HasKitchenObject())
             {
                 // Player has a kitcheobject
-                //Debug.Log("Player is carrying a citcken object");
+                //Debug.Log("Player is carrying a Kitcken object");
 
                 if (player.GetKitchenObject().TryGetPlate(out PlateKitchenObject plateKitchenObject))
                 {
                     // PLayer is holding a plate                    
                     if (plateKitchenObject.TryAddIngredient(GetKitchenObject().GetKitchenObjectSO()))
                     {
-                        GetKitchenObject().DestroySelf();
+                        GetKitchenObject().DestroySelf();                
+
+                        _currentState = State.Idle;
+
+                        OnStateChange?.Invoke(this, new OnStateChangedEventArgs
+                        {
+                            currentState = _currentState,
+                        });
+
+                        OnProgressChanged?.Invoke(this, new IHasProgress.OnprogressEventChangedArgs
+                        {
+                            progressNormalized = 0f
+                        });
                     }
                 }
-
-                _currentState = State.Idle;
-
-                OnStateChange?.Invoke(this, new OnStateChangedEventArgs
-                {
-                    currentState = _currentState,
-                });
-
-                OnProgressChanged?.Invoke(this, new IHasProgress.OnprogressEventChangedArgs
-                {
-                    progressNormalized = 0f
-                });
             }
             else
             {

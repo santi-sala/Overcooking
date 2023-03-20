@@ -24,13 +24,13 @@ public class PlateKitchenObject : KitchenObject
         if (!_validKitchenObjectSOIngredientList.Contains(kitchenObjectSO))
         {
             // Not a valid ingredient
-            Debug.Log("Not a valid ingrdient");
+            //Debug.Log("Not a valid ingrdient");
             return false;
         }
         if (_kitchenObjectSOList.Contains(kitchenObjectSO))
         {
             // Ingredient already exists in the plate (No duplicates!!)
-            Debug.Log("Ingredient already in plate");
+            //Debug.Log("Ingredient already in plate");
             return false;
         }
         else

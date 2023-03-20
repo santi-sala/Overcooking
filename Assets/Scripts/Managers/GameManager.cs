@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
             case State.GameOver:
                 break;
         }
-        Debug.Log(_currentState);
+        //Debug.Log(_currentState);
     }
 
     public bool IsGamePlaying()
