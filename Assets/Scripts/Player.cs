@@ -71,9 +71,17 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
 
     private void Update()
     {
-        HandlePlayerMovement();
-        HandlePlayerInteractions();
+        if (!IsOwner)
+        {
+            return;
+        }
 
+        // *********************************************
+        // Choose between CLIENT or SERVER auth
+        //HandlePlayerMovementServerAuth();
+        HandlePlayerMovement();
+        //**********************************************
+        HandlePlayerInteractions();
     }
     
     public bool IsWalking()
@@ -125,6 +133,80 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
         //Debug.Log(_selectedCounter);
     }
 
+    //******************************************************************
+    // Uncomment if SERVER AUTH IS USED
+    /*
+    private void HandlePlayerMovementServerAuth()
+    {
+        Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
+        HandlePLayerMovementServerRPC(inputVector);
+    }
+    [ServerRpc(RequireOwnership = false)]
+    private void HandlePLayerMovementServerRPC(Vector2 inputVector)
+    {
+        Vector3 moveDirection = new Vector3(inputVector.x, 0f, inputVector.y);
+
+        float moveDistance = _moveSpeed * Time.deltaTime;
+        float playerRadius = 0.7f;
+        float playerHeight = 2f;
+        bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight,
+            playerRadius, moveDirection, moveDistance);
+
+        if (!canMove)
+        {
+            // Trying to move diagonally
+
+            // Attemp to move on the x axis 
+            Vector3 moveDirection_X = new Vector3(moveDirection.x, 0, 0).normalized;
+            canMove = (moveDirection.x < -0.5f || moveDirection.x > +0.5f) && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight,
+            playerRadius, moveDirection_X, moveDistance);
+
+            if (canMove)
+            {
+                // Move on the X axis
+                moveDirection = moveDirection_X;
+            }
+            else
+            {
+                // X axis not possible. Attemp to move on the Z axis
+                Vector3 moveDirection_Z = new Vector3(0, 0, moveDirection.z).normalized;
+                canMove = (moveDirection.z < -0.5f || moveDirection.z > +0.5f) && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight,
+                playerRadius, moveDirection_Z, moveDistance);
+
+                if (canMove)
+                {
+                    // Move to Z axis.
+                    moveDirection = moveDirection_Z;
+                }
+                else
+                {
+                    //Cannot move diagonally to any direction
+                }
+            }
+
+        }
+        if (canMove)
+        {
+            transform.position += moveDirection * moveDistance;
+        }
+
+        //_isWalking = moveDirection != Vector3.zero;
+        if (moveDirection == Vector3.zero)
+        {
+            _isWalking = false;
+        }
+        else
+        {
+            _isWalking = true;
+        }
+
+        transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * _rotateSpeed);
+    }
+    */
+    //**************************************************
+
+    //**************************************************
+    // Comment if SERVER auth is used
     private void HandlePlayerMovement()
     {
         Vector3 moveDirection = GetPlayerMovementDirection();
@@ -185,6 +267,7 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
 
         transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * _rotateSpeed);
     }
+    //*********************************************************
 
     private void SetSelectedCounter(BaseCounter selectedCounterParameter)
     {
