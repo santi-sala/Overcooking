@@ -20,9 +20,12 @@ public class GameManager : MonoBehaviour
     }
 
     private State _currentState;
-    private float _countdownToStartTimer = 3f;
+    //****************************************************************************
+    //Change after finish development
+    private float _countdownToStartTimer = 1f; 
+    [SerializeField] private float _gamePlayingTimerMax = 300f;
+    //****************************************************************************
     private float _gamePlayingTimer;
-    [SerializeField] private float _gamePlayingTimerMax = 10f;
 
     private bool _isGamePaused = false;
 
@@ -36,6 +39,12 @@ public class GameManager : MonoBehaviour
     {
         GameInput.Instance.OnPauseEvent += GameInput_Instance_OnPauseEvent;
         GameInput.Instance.OnInteractAction += GameInput_Instance_OnInteractAction;
+
+        //***********************************************
+        // Remove after development is finished!!
+        _currentState = State.CountdownToStart;
+        OnStateChange?.Invoke(this, EventArgs.Empty);
+        //***********************************************
     }
 
     private void GameInput_Instance_OnInteractAction(object sender, EventArgs e)

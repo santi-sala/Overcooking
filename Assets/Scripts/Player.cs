@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IKitchenObjectParent
+public class Player : NetworkBehaviour, IKitchenObjectParent
 {
-    public static Player Instance { get; private set; }
+    //public static Player Instance { get; private set; }
 
     public event EventHandler OnPickUpSomething;
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
@@ -16,7 +17,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
     [SerializeField] private float _moveSpeed = 7f;
     [SerializeField] private float _rotateSpeed = 10f;
-    [SerializeField] private GameInput _gameInput;
+    //[SerializeField] private GameInput _gameInput;
     [SerializeField] private LayerMask _countersLayerMask;
     [SerializeField] private Transform _KitchenObjectHoldPoint;
 
@@ -28,17 +29,17 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
     private void Awake()
     {
-        if (Instance != null)
+        /*if (Instance != null)
         {
             Debug.LogError("There is more than one player instance!!!!");
         }
-        Instance = this;
+        Instance = this;*/
     }
 
     private void Start()
     {
-        _gameInput.OnInteractAction += GameInput_OnInteractAction;
-        _gameInput.OnInteractAlternateAction += GameInput_OnInteractAlternateAction;
+        GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
+        GameInput.Instance.OnInteractAlternateAction += GameInput_OnInteractAlternateAction;
     }
 
     private void GameInput_OnInteractAlternateAction(object sender, EventArgs e)
@@ -82,7 +83,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
     private Vector3 GetPlayerMovementDirection()
     {
-        Vector2 inputVector = _gameInput.GetMovementVectorNormalized();
+        Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
         Vector3 moveDirection = new Vector3(inputVector.x, 0f, inputVector.y);
         return moveDirection;
     }
