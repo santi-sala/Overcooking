@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerAnimator : MonoBehaviour
+public class PlayerAnimator : NetworkBehaviour
 {
+    
     private Animator _animator;
 
     [SerializeField]
@@ -18,7 +20,10 @@ public class PlayerAnimator : MonoBehaviour
 
     private void Update()
     {
-
+        if (!IsOwner)
+        {
+            return;
+        }
         _animator.SetBool(IS_WALKING, _player.IsWalking());
     }
 }
