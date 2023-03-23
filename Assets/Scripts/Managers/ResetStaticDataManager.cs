@@ -17,5 +17,8 @@ public class ResetStaticDataManager : MonoBehaviour
 
         // Clearing the OnAnyObjectTrashed STATIC EVENT from TrashCounter class
         TrashCounter.ResetStaticData();
+
+        // Clearing the OnAnyPlayerSpawned STATIC EVENT from TrashCounter class
+        Player.ResetStaticData();
     }
 }
