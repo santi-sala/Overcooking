@@ -15,8 +15,10 @@ public class PlateKitchenObject : KitchenObject
     
     private List<SO_KitchenObjects> _kitchenObjectSOList;
 
-    private void Awake()
+    // This awake will run first the awake of KitchenObject and then the List.
+    protected override void Awake()
     {
+        base.Awake();
         _kitchenObjectSOList = new List<SO_KitchenObjects>();
     }
     public bool TryAddIngredient(SO_KitchenObjects kitchenObjectSO)

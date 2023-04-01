@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 8556590998381163931, guid: b8848d42971ed12429659cb795be6e37,
         type: 3}
       propertyPath: m_Name
-      value: ContainerCounter
+      value: ContainerCounter_Cheese
       objectReference: {fileID: 0}
     - target: {fileID: 8556590998381163933, guid: b8848d42971ed12429659cb795be6e37,
         type: 3}

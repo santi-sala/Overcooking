@@ -9,6 +9,13 @@ public class KitchenObject : NetworkBehaviour
     [SerializeField] private SO_KitchenObjects _kitchenObjectSO;
 
     private IKitchenObjectParent _kitchenObjectParent;
+    private FollowTransform _followTransform;
+
+    // This awake was having conflicts with PlateKitchenObject as it also has its own awake
+    protected virtual void Awake()
+    {
+        _followTransform = GetComponent<FollowTransform>();
+    }
 
     public SO_KitchenObjects GetKitchenObjectSO()
     {
@@ -17,6 +24,20 @@ public class KitchenObject : NetworkBehaviour
 
     public void SetKitchenObjectParent(IKitchenObjectParent kitchenObjectParent)
     {
+        SetKitchenObjectParentServerRpc(kitchenObjectParent.GetNetworkObject());
+    }
+    [ServerRpc(RequireOwnership = false)]
+    private void SetKitchenObjectParentServerRpc(NetworkObjectReference kitchenObjectParentNetworkObjectReference)
+    {
+        SetKitchenObjectParentClientRpc(kitchenObjectParentNetworkObjectReference);
+    }
+
+    [ClientRpc]
+    private void SetKitchenObjectParentClientRpc(NetworkObjectReference kitchenObjectParentNetworkObjectReference)
+    {
+        kitchenObjectParentNetworkObjectReference.TryGet(out NetworkObject kitchenObjectParentNetworkObject);
+        IKitchenObjectParent kitchenObjectParent = kitchenObjectParentNetworkObject.GetComponent<IKitchenObjectParent>();
+
         // Clearing kitchen object from old clear counter
         if (this._kitchenObjectParent != null)
         {
@@ -32,6 +53,8 @@ public class KitchenObject : NetworkBehaviour
         kitchenObjectParent.SetKitchenObject(this);
 
         // Teleporting the visual of the kitchen object to the new parent
+        _followTransform.SetTargetTransform(kitchenObjectParent.GetKitchenObjectFollowTransform());
+
         //transform.parent = kitchenObjectParent.GetKitchenObjectFollowTransform();
         //transform.localPosition = Vector3.zero;
     }
