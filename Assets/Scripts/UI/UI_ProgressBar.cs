@@ -28,11 +28,11 @@ public class UI_ProgressBar : MonoBehaviour
 
         if (e.progressNormalized == 0f || e.progressNormalized == 1f)
         {
-            Hide();
+          Hide();
         }
         else
         {
-            Show();
+           Show();
         }
     }
 
