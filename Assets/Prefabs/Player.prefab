@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 1765699403396853872}
   - component: {fileID: -6115034664442326987}
   - component: {fileID: 1786661667384244936}
-  m_Layer: 0
+  - component: {fileID: 1801950097078096734}
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +56,15 @@ MonoBehaviour:
   _countersLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  _colisionsLayerMask:
+    serializedVersion: 2
+    m_Bits: 448
   _KitchenObjectHoldPoint: {fileID: 1765699404786976456}
+  _spawnPositionList:
+  - {x: -2, y: 0, z: 0}
+  - {x: 2, y: 0, z: 0}
+  - {x: -2, y: 0, z: -2}
+  - {x: 2, y: 0, z: -2}
 --- !u!114 &1765699403396853872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,6 +120,19 @@ MonoBehaviour:
   ScaleThreshold: 0.01
   InLocalSpace: 0
   Interpolate: 1
+--- !u!65 &1801950097078096734
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765699403396853877}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7, y: 1, z: 0.7}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &1765699404786976459
 GameObject:
   m_ObjectHideFlags: 0
