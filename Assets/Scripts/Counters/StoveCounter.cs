@@ -122,7 +122,7 @@ public class StoveCounter : BaseCounter, IHasProgress
         }
         else
         {
-            _currentState.Value = State.Idle;
+            SetStateIdleServerRpc();
         }
             //Debug.Log(_currentState);
           

@@ -19,6 +19,7 @@ public class UI_ProgressBar : MonoBehaviour
         _hasProgress.OnProgressChanged += HasProgress_OnProgressChanged;
 
         _barImage.fillAmount = 0f;
+
         Hide();
     }
 
@@ -28,11 +29,13 @@ public class UI_ProgressBar : MonoBehaviour
 
         if (e.progressNormalized == 0f || e.progressNormalized == 1f)
         {
+            //Debug.Log("Hide " + e.progressNormalized);
           Hide();
         }
         else
         {
-           Show();
+            //Debug.Log("Show " + e.progressNormalized);
+            Show();
         }
     }
 
