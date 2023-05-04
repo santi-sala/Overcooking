@@ -128,7 +128,7 @@ public class UI_Options : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.OnGameResume += GameManager_Instance_OnGameResume;
+        GameManager.Instance.OnLocalGameResume += GameManager_Instance_OnGameResume;
 
         UpdateVisualSfx();
         UpdateVisualMusic();

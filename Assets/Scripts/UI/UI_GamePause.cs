@@ -11,14 +11,6 @@ public class UI_GamePause : MonoBehaviour
     [SerializeField] private Button _mainMenuButton;
     [SerializeField] private Button _mainOptionsButton;
 
-    private void Start()
-    {
-        GameManager.Instance.OnGamePaused += GameManager_Instance_OnGamePaused;
-        GameManager.Instance.OnGameResume += GameManager_Instance_OnGameResume;
-
-        Hide();
-    }
-
     private void Awake()
     {
         Instance = this;
@@ -38,15 +30,22 @@ public class UI_GamePause : MonoBehaviour
             Hide();
             UI_Options.Instance.Show(Show);
         });
-
-
     }
-    private void GameManager_Instance_OnGameResume(object sender, System.EventArgs e)
+
+    private void Start()
+    {
+        GameManager.Instance.OnLocalGamePaused += GameManager_Instance_OnLocalGamePaused;
+        GameManager.Instance.OnLocalGameResume += GameManager_Instance_OnLocalGameResume;
+
+        Hide();
+    }
+
+    private void GameManager_Instance_OnLocalGameResume(object sender, System.EventArgs e)
     {
         Hide();
     }
 
-    private void GameManager_Instance_OnGamePaused(object sender, System.EventArgs e)
+    private void GameManager_Instance_OnLocalGamePaused(object sender, System.EventArgs e)
     {
         Show();
     }
