@@ -190,6 +190,11 @@ public class GameManager : NetworkBehaviour
         return _isLocalPLayerReady;
     }
 
+    public bool IsWaitingToStart()
+    {
+        return _currentState.Value == State.WaitingToStart;
+    }
+
     public bool IsGamePlaying()
     {
         return _currentState.Value == State.GamePlaying;
