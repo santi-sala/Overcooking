@@ -8,6 +8,13 @@ public class UI_HostDisconnect : MonoBehaviour
 {
     [SerializeField] private Button _playAgain;
 
+    private void Awake()
+    {
+        _playAgain.onClick.AddListener(() =>
+        {
+            Loader.Load(Loader.Scene.MainMenuScene);
+        });
+    }
     private void Start()
     {
         NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_Singleton_OnClientDisconnectCallback;
