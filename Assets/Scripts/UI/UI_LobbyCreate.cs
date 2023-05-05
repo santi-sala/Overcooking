@@ -35,6 +35,8 @@ public class UI_LobbyCreate : MonoBehaviour
     public void Show()
     {
         gameObject.SetActive(true);
+
+        _btnPublicLobby.Select();
     }
 
     private void Hide()
